@@ -1,0 +1,8 @@
+node_modules
+node_modules/
+dist/
+.tmp
+.idea
+.idea/
+admin-si.iml
+package-lock.json

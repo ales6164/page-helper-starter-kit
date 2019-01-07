@@ -1,0 +1,10 @@
+{
+  "translations": {
+    "en": {
+      "HelloWorld": "Hello World!"
+    },
+    "sl": {
+      "HelloWorld": "Pozdravljen svet!"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+runtime: go
+api_version: go1.9
+
+skip_files:
+  - .idea/
+  - .tmp/
+  - node_modules/
+  - src/
+  - docs/
+
+handlers:
+  - url: /.*
+    script: _go_app
+    secure: always
