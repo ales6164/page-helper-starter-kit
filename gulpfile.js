@@ -6,16 +6,19 @@ const express = require('express');
 const pages = require('page-helper');
 const $ = gulpLoadPlugins();
 
-const app = express();
+const expressApp = express();
 
 // DEV CONFIG
-const WebApp = new pages.Helper({
+const App = new pages.Helper({
     workingDir: 'web/src',
     defaultLocale: 'sl',
     routes: [
-       {
+        {
             path: '*',
             component: 'page-home',
+            page: {
+                title: 'Home',
+            }
         },
     ]
 });
@@ -52,26 +55,17 @@ gulp.task('styles', () => {
 // Watch files for changes & reload
 gulp.task('serve', ['styles'], () => {
     const port = 3000;
-    WebApp.parse('web/src/components/*.html');
-    WebApp.parse('web/src/pages/*.html');
-    //WebApp.parse('web/src/pages/*.html', true);
-    WebApp.parseLayout('web/src/index.html');
-    WebApp.parseResource('web/src/*.json');
+    App.parse('web/src/components/*.html');
+    App.parse('web/src/pages/*.html');
+    //App.parse('web/src/pages/*.html', true);
+    App.parseLayout('web/src/index.html');
+    App.parseResource('web/src/*.json');
 
-    app.use(express.static('web/src/public'));
+    expressApp.use(express.static('web/src/public'));
 
-    WebApp.setupExpress(app, {liveReload: true});
+    App.setupExpress(expressApp, {liveReload: true});
 
-    app.listen(port, () => console.log('app listening on port ' + port));
+    expressApp.listen(port, () => console.log('app listening on port ' + port));
 
-    gulp.watch(['web/src/public/styles/**/*.scss'], ['styles', WebApp.reload.reload]);
-});
-
-gulp.task('build', ['styles'], (done) => {
-    WebApp.parse('web/src/components/*.html');
-    WebApp.parse('web/src/pages/*.html', true);
-    WebApp.parseLayout('web/src/index.html');
-    WebApp.parseResource('web/src/*.json');
-    WebApp.build('web/dist');
-    done()
+    gulp.watch(['web/src/public/styles/**/*.scss'], ['styles', App.reload.reload]);
 });

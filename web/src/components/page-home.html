@@ -1,0 +1,12 @@
+<template>
+    <h1>{{i18n "HelloWorld"}}</h1>
+    <lorem-ipsum></lorem-ipsum>
+</template>
+<script>
+    module.exports = class extends HTMLElement {
+        constructor() {
+            super();
+            console.log("Hello World!");
+        }
+    }
+</script>
